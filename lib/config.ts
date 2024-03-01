@@ -1,4 +1,7 @@
 import Joi from 'joi';
+
+import fs from "fs";
+import path from "path";
 import { readJson } from '@/lib/utils/fs';
 
 export interface BaseConfig {

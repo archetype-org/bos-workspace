@@ -5,6 +5,7 @@ import { buildWorkspace, devWorkspace } from "./workspace";
 import { initProject } from "@/lib/init";
 import path from "path";
 import { dev } from "./dev";
+import { clone, pull, remove } from "./repository";
 
 const program = new Command();
 
@@ -103,6 +104,30 @@ async function run() {
     .description("Upload data to SocialDB (not implemented)")
     .argument("[string]", "app name")
     .action((appName) => {
+    });
+  program
+    .command("clone")
+    .description("Download all the components from an account")
+    .argument("[account_id]", "accountId")
+    .action((accountId) => {
+      clone(accountId);
+    });
+  program
+    .command("pull")
+    .description(
+      "Sync origin with all the new or modified components from an account",
+    )
+    .argument("[account_id]", "accountId")
+    .action((accountId) => {
+      pull(accountId);
+    });
+  
+    program
+    .command("remove")
+    .description("Delete downloaded components from an account")
+    .argument("[account_id]", "accountId")
+    .action((accountId) => {
+      remove(accountId);
     });
 
   program.parse();
